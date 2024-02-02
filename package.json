@@ -10,7 +10,8 @@
     "migration:generate": "drizzle-kit generate:sqlite",
     "migration:run": "ts-node ./db/scripts/migrate.ts",
     "drizzle:studio": "drizzle-kit studio",
-    "db:seed": "ts-node ./db/scripts/seed.ts"
+    "db:seed": "ts-node ./db/scripts/seed.ts",
+    "task:notify": "ts-node tasks/notify.ts"
   },
   "keywords": [],
   "author": "",
