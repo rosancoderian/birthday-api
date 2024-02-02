@@ -97,7 +97,7 @@ const notify = async (msg: (user: Schema.User) => void) => {
   }
 }
 
-schedule.scheduleJob({ hour: 9 }, async () => {
+const job = schedule.scheduleJob({ hour: 9 }, async () => {
   await push()
   await notify((user) => `Hey!, today is ${user.firstname} is your birthday!`)
 })
