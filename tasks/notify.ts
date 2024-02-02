@@ -13,18 +13,17 @@ dayjs.extend(timezone)
 
 let isRunning = false
 
-const push = async () => {
-  const today = dayjs()
+const today = () => dayjs()
     .set('hour', 0)
     .set('minute', 0)
     .set('second', 0)
     .utc()
-    .format()
 
+const push = async () => {
   const users = await db
     .select()
     .from(Schema.users)
-    .where(eq(Schema.users.dob, today))
+    .where(eq(Schema.users.dob, today().format()))
     .execute()
 
   if (!users.length) return
@@ -70,6 +69,12 @@ const notify = async (msg: (user: Schema.User) => void) => {
       if (!user) {
         console.log(`User ${q.userId} is not found`)
         return
+      }
+
+      if (today().format() !== user.dob) {
+        db.delete(Schema.birthdayNotifQueue)
+            .where(eq(Schema.birthdayNotifQueue.userId, user.id))
+            .execute()
       }
 
       const data = {
