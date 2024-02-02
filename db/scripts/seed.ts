@@ -1,22 +1,17 @@
 import { faker } from '@faker-js/faker'
 import { db } from '../connection'
 import * as Schema from '../schema'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-import timezone from 'dayjs/plugin/timezone'
+import date from '../../utils/date'
 import { v4 as uid } from 'uuid'
-
-dayjs.extend(utc)
-dayjs.extend(timezone)
 
 console.log('Seeding...')
 
-const dob = dayjs.tz('1993-03-11', 'Asia/Jakarta').utc().format()
+const dob = date.tz('1993-03-11', 'Asia/Jakarta').utc().format()
 
 for (let i = 0; i < 50; i++) {
   const firstname = faker.person.firstName()
   const email = `${firstname}${uid()}@email.com`
-  const randomDob = dayjs(faker.date.past({ years: 20 }))
+  const randomDob = date(faker.date.past({ years: 20 }))
     .set('hour', 0)
     .set('minute', 0)
     .set('second', 0)

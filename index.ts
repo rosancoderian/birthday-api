@@ -1,12 +1,7 @@
 import fastify from 'fastify'
 import { createUser, deleteUser, updateUser } from './modules/users'
 import ct from 'countries-and-timezones'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-import timezone from 'dayjs/plugin/timezone'
-
-dayjs.extend(utc)
-dayjs.extend(timezone)
+import date from './utils/date'
 
 const app = fastify()
 app.listen({ port: 3000 }, (err, addr) => {
@@ -36,7 +31,7 @@ app.post<{ Body: UserBody }>('/user', async (req, rep) => {
   try {
     const { pob, d, m, y, firstname, lastname, email } = req.body
     const [tz] = ct.getTimezonesForCountry(pob) || []
-    const dob = dayjs.tz(`${y}-${m}-${d}`, tz.name).utc().format()
+    const dob = date.tz(`${y}-${m}-${d}`, tz.name).utc().format()
     const data = {
       pob,
       firstname,
@@ -73,7 +68,7 @@ app.put<{ Params: { userId: string }; Body: UserBody }>(
       let data = {}
       if (pob && d && m && y) {
         const [tz] = ct.getTimezonesForCountry(pob) || []
-        const dob = dayjs.tz(`${y}-${m}-${d}`, tz.name).utc().format()
+        const dob = date.tz(`${y}-${m}-${d}`, tz.name).utc().format()
         data = { pob, dob }
       }
       await updateUser(Number(req.params.userId), {...data, ...body})

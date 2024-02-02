@@ -3,17 +3,12 @@ import { eq } from 'drizzle-orm'
 
 import { db } from '../db/connection'
 import * as Schema from '../db/schema'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-import timezone from 'dayjs/plugin/timezone'
 import schedule from 'node-schedule'
-
-dayjs.extend(utc)
-dayjs.extend(timezone)
+import date from '../utils/date'
 
 let isRunning = false
 
-const today = () => dayjs()
+const today = () => date()
     .set('hour', 0)
     .set('minute', 0)
     .set('second', 0)
