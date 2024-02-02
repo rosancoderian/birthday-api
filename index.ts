@@ -41,7 +41,7 @@ app.post<{ Body: NewUserReqBody }>('/user', async (req, rep) => {
     rep.status(201).send(createdUser)
   } catch (error) {
     console.error(error)
-    rep.status(500).send({ error: 'Internal Server Error' })
+    rep.status(500).send({ error })
   }
 })
 
@@ -53,7 +53,7 @@ app.delete<{ Params: { userId: string } }>(
       rep.status(204).send()
     } catch (error) {
       console.error(error)
-      rep.status(500).send({ error: 'Internal Server Error' })
+      rep.status(500).send({ error })
     }
   }
 )
