@@ -1,0 +1,39 @@
+{
+  "name": "surya-digital-be-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.ts",
+    "start": "node ./dist/index.js",
+    "build": "tsc",
+    "migration:generate": "drizzle-kit generate:sqlite",
+    "migration:run": "ts-node ./db/scripts/migrate.ts",
+    "drizzle:studio": "drizzle-kit studio",
+    "db:seed": "ts-node ./db/scripts/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "countries-and-timezones": "^3.6.0",
+    "dayjs": "^1.11.10",
+    "drizzle-orm": "^0.29.3",
+    "fastify": "^4.26.0",
+    "node-schedule": "^2.1.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.0",
+    "@types/better-sqlite3": "^7.6.9",
+    "@types/node": "^20.11.15",
+    "@types/node-schedule": "^2.1.5",
+    "@types/uuid": "^9.0.8",
+    "better-sqlite3": "^9.3.0",
+    "drizzle-kit": "^0.20.13",
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
