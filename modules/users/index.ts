@@ -16,3 +16,12 @@ export const deleteUser = async (userId: number) => {
     .where(eq(Schema.users.id, userId))
     .returning()
 }
+
+export const updateUser = async (userId: number, user: Partial<Schema.NewUser>) => {
+  console.log(user)
+  return await db
+    .update(Schema.users)
+    .set(user)
+    .where(eq(Schema.users.id, userId))
+    .returning()
+}
