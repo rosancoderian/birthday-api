@@ -1,5 +1,3 @@
-surya-digital-be-test
-
 Run API
 ```
 pnpm dev
